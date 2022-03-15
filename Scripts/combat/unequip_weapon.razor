@@ -1,0 +1,22 @@
+createlist weapon_types
+pushlist weapon_types 'war mace'
+pushlist weapon_types 'quarter staff'
+
+foreach weapon_type in weapon_types
+    if findlayer self righthand as weapon
+        getlabel weapon label
+        if lyric in label
+            lift weapon 1
+            drop backpack
+            break
+        endif
+     endif
+    if findlayer self lefthand as weapon
+        getlabel weapon label
+        if lyric in label
+            lift weapon 1
+            drop backpack
+            break
+        endif
+     endif     
+endfor

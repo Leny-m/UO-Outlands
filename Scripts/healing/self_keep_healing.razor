@@ -1,0 +1,28 @@
+if skill 'Healing' > 25
+    if not timerexists 'BandageTimer'
+        createtimer 'BandageTimer'
+        settimer 'BandageTimer' 11000
+    endif
+    if @insysmsg 'You begin applying'
+        overhead 'Applying Bandages'
+        settimer 'BanadageTimer' 0
+        @clearsysmsg
+    endif
+    if @insysmsg 'You finish applying the bandages.'
+        overhead 'Bandage Finished'
+        settimer 'BandageTimer' 11000
+        @clearsysmsg
+    endif
+    if @insysmsg 'That being is not damaged!'
+        overhead 'Target at Full'
+        settimer 'BandageTimer' 11000
+        @clearsysmsg 
+    endif
+    if timer 'BandageTimer' > 11000 and not targetexists and hits < maxhits and not hidden 'self'
+        @clearsysmsg
+        hotkey 'Bandage Self'
+        settimer 'BandageTimer' 0
+    endif
+endif
+wait 100
+loop

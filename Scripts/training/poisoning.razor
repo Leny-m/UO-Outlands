@@ -1,0 +1,43 @@
+clearignore
+if poisoned
+    if findtype 'Orange Potion' backpack as pot
+        while not insysmsg 'You are not poisoned.'
+            dclick pot
+        endwhile
+    else
+        cast 'Cure'
+        wft
+        target 'self'
+        wait 100
+    endif
+endif
+if hits < maxhits
+    if findtype '3617' backpack
+        hotkey 'bandage self'
+        wait 11000
+    else
+        cast 'greater heal'
+        wft
+        target 'self'
+        wait 1000
+    endif
+endif
+if not poisoned
+    if findtype 'Green Potion' backpack as pot
+        useskill 'Poisoning'
+        wft 500
+        target pot
+        wft 500
+        targettype 'war fork' backpack
+        wait 4500
+    else
+        if findtype 'keg' backpack 363 as keg
+            dclick keg
+            wait 1000
+        else
+            overhead 'No poison kegs or pots!' 33
+            wait 3000
+        endif
+    endif    
+endif
+loop

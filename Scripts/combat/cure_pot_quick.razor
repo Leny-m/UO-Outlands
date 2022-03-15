@@ -1,0 +1,6 @@
+if findtype 'Orange Potion' backpack as pot
+    overhead 'CURE pot' 44
+    while not insysmsg 'You are not poisoned.'
+        dclick pot
+    endwhile
+endif

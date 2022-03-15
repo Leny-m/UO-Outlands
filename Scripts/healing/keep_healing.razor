@@ -1,0 +1,40 @@
+clearsysmsg 
+if not hidden
+    if hits < maxhits
+        hotkey 'bandage self'
+        wait 500
+        if not insysmsg 'you begin'
+            replay
+        endif
+        while not insysmsg 'you finish'
+            if hits = maxhits
+                break
+            endif
+            wait 100
+        endwhile
+    endif
+    # heal Doughmaker
+    dclicktype 'clean bandage%s%'
+    wft 500
+    target friend_heal
+    wait 500
+    if not insysmsg 'you begin'
+        replay
+    endif
+    while not insysmsg 'you finish'
+        if insysmsg 'cannot be seen'
+            overhead 'Cannot see - Doughmaker' 11
+            break
+        endif    
+        if insysmsg 'too far away'
+            overhead 'Too far - Doughmaker' 11
+            break
+        endif
+        if insysmsg 'not damaged' or insysmsg 'you must wait' or insysmsg 'you did not stay'
+            break
+        endif
+        wait 100
+    endwhile
+endif
+wait 1000
+loop

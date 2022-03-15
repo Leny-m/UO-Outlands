@@ -1,0 +1,19 @@
+createlist weapon_types
+pushlist weapon_types 'war mace'
+pushlist weapon_types 'quarter staff'
+setvar found 0
+
+clearignore 
+foreach weapon_type in weapon_types
+    while findtype weapon_type backpack as weapon
+        getlabel weapon label
+        if lyric in label
+            dclick weapon
+            setvar found 1
+            break
+        endif
+    endwhile
+    if found = 1
+        break
+    endif
+endfor

@@ -1,0 +1,31 @@
+setvar pacification_target
+while hits > 0 or hits < 100
+    target pacification_target
+    useskill 'peacemaking'
+    wft 500
+    target pacification_target
+    wait 5000
+    if insysmsg 'barding break'
+        continue
+    endif
+    wait 5000
+    if insysmsg 'barding break'
+        continue
+    endif
+    wait 5000
+    if insysmsg 'barding break'
+        continue
+    endif
+    wait 5000
+    if insysmsg 'barding break'
+        continue
+    endif
+    wait 5000
+    if insysmsg 'barding break'
+        continue
+    endif
+    wait 5000
+    if insysmsg 'barding break'
+        continue
+    endif
+endwhile

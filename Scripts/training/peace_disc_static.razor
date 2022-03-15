@@ -1,0 +1,25 @@
+while hits == 100
+    clearsysmsg 
+    dclicktype 'lute' backpack
+    wait 100
+    skill 'discordance'
+    targettype 'lute' backpack
+    wft 500
+    target 0x3B325C
+    wait 7000
+    
+    if insysmsg 'the world is saving'
+        wait 6000
+    endif
+
+    clearsysmsg 
+    skill 'discordance'
+    targettype 'lute' backpack
+    wft 500
+    target 0x3B325C
+    wait 7000
+    
+    if insysmsg 'the world is saving'
+        wait 6000
+    endif
+endwhile

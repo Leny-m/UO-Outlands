@@ -1,0 +1,53 @@
+# made by Doughmaker (OneMoreKnight#1326)
+clearsysmsg 
+setvar equip_pickaxe 1
+setvar pickaxe_type 3718
+while hits > 95 and weight < 580
+    if findlayer self righthand as item
+        getlabel item label
+        if pickaxe in label
+            dclick item backpack
+            wft 500
+            target 'self'
+            if equip_pickaxe = 1
+                setvar equip_pickaxe 0
+            endif
+        else
+            setvar equip_pickaxe 1
+        endif
+    else
+        setvar equip_pickaxe 1
+    endif
+
+    if equip_pickaxe = 1
+        if findtype pickaxe_type
+        overhead 'Equiping a pickaxe' 44
+            dclicktype pickaxe_type backpack
+            wait 500
+            replay
+        else
+            overhead 'Could not find a pickaxe' 33
+            wait 500
+        endif
+    endif
+
+    while not insysmsg 'you loosen' and not insysmsg 'you dig'
+        if insysmsg 'you do not see any harvestable'
+        overhead 'Move to another spot' 33
+            wait 1000
+            break
+        endif
+        if insysmsg 'you broke your pick'
+            dclicktype pickaxe_type backpack
+            wait 500
+        endif
+        wait 100
+    endwhile
+endwhile
+
+if weight > 570
+    overhead 'Too heavy, smelt the ore!' 33
+    wait 1000
+    dclicktype '6585'
+    loop
+endif

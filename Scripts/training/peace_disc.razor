@@ -1,0 +1,46 @@
+while hits == 100
+    clearsysmsg 
+    dclicktype 'lute' backpack
+    wait 100
+    skill 'peacemaking'
+    targettype 'lute' backpack
+    wft 500
+    target 0x3B325C
+    wait 5500
+    while not insysmsg 'You fail' and not insysmsg 'You play'
+        wait 100
+        if insysmsg 'the world is saving'
+            while not insysmsg 'world save complete'
+                wait 100
+            endwhile
+        endif
+        if insysmsg 'You must wait'
+            wait 1000
+            break
+        elseif insysmsg 'That is too far away'
+            dclicktype 'lute' backpack
+            break
+        endif    
+    endwhile
+    clearsysmsg 
+    skill 'discordance'
+    targettype 'lute' backpack
+    wft 500
+    target 0x3B325C
+    wait 5500
+    while not insysmsg 'You fail' and not insysmsg 'You play'
+        wait 100
+        if insysmsg 'the world is saving'
+            while not insysmsg 'world save complete'
+                wait 100
+            endwhile
+        endif
+        if insysmsg 'You must wait'
+            wait 1000
+            break
+        elseif insysmsg 'That is too far away'
+            dclicktype 'lute' backpack
+            break
+        endif      
+    endwhile
+endwhile

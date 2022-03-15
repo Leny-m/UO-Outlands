@@ -1,0 +1,62 @@
+setvar train_camping 0
+setvar train_item_id 0
+setvar train_stealth 0
+
+if train_camping = 1 and skill 'camping' < 100
+    if not findtype "kindling" backpack
+        overhead "Need more kindling" 34
+        wait 5000
+        replay
+    endif
+        
+    if not findtype "campfire" ground 0 1 1
+        dclicktype "kindling" backpack
+    endif
+endif
+    
+if skill "hiding" < 80
+    useskill 'Hiding'
+    if train_item_id = 1
+        for 10
+            useskill 'itemid'
+            wft 500
+            targettype 'bulk order book'
+            wait 1200
+        endfor
+    else
+        wait 11000
+    endif
+    loop
+endif
+
+if not hidden 
+    useskill 'Hiding'
+    if train_item_id = 1
+        for 10
+            useskill 'itemid'
+            wft 500
+            targettype 'bulk order book'
+            wait 1200
+        endfor
+    else
+        wait 11000
+    endif
+endif
+
+if hidden and train_stealth = 1 and skill 'stealth' < 100
+    useskill 'Stealth'
+    wait 11000
+else
+    useskill 'Hiding'
+    if train_item_id = 1
+        for 10
+            useskill 'itemid'
+            wft 500
+            targettype 'bulk order book'
+            wait 1200
+        endfor
+    else
+        wait 11000
+    endif
+endif
+loop

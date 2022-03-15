@@ -1,0 +1,31 @@
+if not listexists pot_types
+    createlist pot_types
+    #pushlist pot_types 'Black Potion'
+    pushlist pot_types 'Green Potion'
+    #pushlist pot_types 'Orange Potion'
+    #pushlist pot_types 'Yellow Potion'
+    #pushlist pot_types 'Red Potion'
+    #pushlist pot_types 'Purple Potion'
+endif
+
+clearsysmsg 
+while hits > 40
+    while findtype 'empty bottle%s%' backpack
+        if findtype 'keg' backpack any any any 1 as keg
+            dclick keg 
+            wait 100
+            if insysmsg 'the keg is empty'
+                ignore keg
+            endif
+        else
+            break
+        endif
+    endwhile
+
+    foreach pot_type in pot_types
+        while findtype pot_type backpack as pot
+            dclick pot
+            wait 100
+        endwhile
+    endfor
+endwhile

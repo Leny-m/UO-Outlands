@@ -1,0 +1,17 @@
+clearsysmsg 
+if skill 'healing' < 100
+    if findtype '5912' as hat
+        if maxhits = 100
+            dclick hat
+            wait 1000
+        endif
+        dclick hat
+        wait 1000
+        if maxhits = 95
+            replay
+        endif
+        hotkey 'Bandage Self'
+        wait 11000
+        loop
+    endif
+endif

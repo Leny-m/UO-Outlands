@@ -1,0 +1,32 @@
+createlist shield_types
+pushlist shield_types 'order shield'
+
+if findtype 'Red Potion' backpack as pot
+    overhead 'TR pot' 33
+
+    if findlayer self lefthand as shield
+        lift shield 1
+        drop backpack
+        dclick pot 
+        wait 500
+        dclick shield
+    else
+        dclick pot 
+        wait 500
+        while hits > 0
+            foreach shield_type in shield_types
+                if findtype shield_type backpack as shield
+                    getlabel shield label
+                    if unidenfitied in label
+                        ignore shield
+                    else
+                        dclick shield
+                        clearignore        
+                        hotkey '> stop current script'
+                    endif
+                endif
+            endfor
+        endwhile
+    endif
+endif
+hotkey 'Play Script: healing\self_keep_healing'

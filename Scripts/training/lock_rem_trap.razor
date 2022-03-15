@@ -1,0 +1,21 @@
+if skill 'remove trap' < 109
+    overhead 'Remove Trap' 77
+    gumpresponse 7
+    waitforgump 736038070
+    wait 3000
+endif
+if skill 'hiding' < 100
+    overhead 'Hiding' 77
+    useskill 'hiding'
+endif
+if skill 'lockpicking' < 109
+    overhead 'Lockpicking' 77
+    gumpresponse 4
+    waitforgump 736038070
+    wait 3000
+endif
+if skill 'hiding' < 100
+    overhead 'Hiding' 77
+    useskill 'hiding'
+endif
+loop

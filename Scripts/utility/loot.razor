@@ -1,0 +1,65 @@
+# made by Doughmaker (OneMoreKnight#1326)
+if not listexists item_types_loot
+    createlist item_types_loot
+    # skill mastery orb
+    pushlist item_types_loot '22336'
+    # research materials
+    pushlist item_types_loot '29348'
+    # MCD
+    pushlist item_types_loot '17087'
+    # map
+    pushlist item_types_loot '5356'
+    # dye
+    pushlist item_types_loot '3838'
+    pushlist item_types_loot '29036'
+    # aspect core
+    pushlist item_types_loot '3985'
+    # skill scroll
+    pushlist item_types_loot '8826'
+    # extract
+    pushlist item_types_loot '3836'
+    # GP
+    pushlist item_types_loot '3821'
+    # phylactery
+    pushlist item_types_loot '576'
+    # Arcane Scroll 
+    pushlist item_types_loot '3827' 
+    # plant chemicals
+    pushlist item_types_loot '29030'
+    # regs 
+    pushlist item_types_loot '3973'
+    pushlist item_types_loot '3980'
+    pushlist item_types_loot '3981'
+    pushlist item_types_loot '3976'
+    pushlist item_types_loot '3974'
+    pushlist item_types_loot '3972'
+    pushlist item_types_loot '3963'
+    pushlist item_types_loot '3962'
+    pushlist item_types_loot '3861'
+    pushlist item_types_loot '3865'
+    pushlist item_types_loot '3885'
+    pushlist item_types_loot '3877'
+    pushlist item_types_loot '3862'
+    pushlist item_types_loot '3859'
+    pushlist item_types_loot '3873'
+    pushlist item_types_loot '3878'
+    pushlist item_types_loot '3856'
+    pushlist item_types_loot '4225'
+    # any log
+    pushlist item_types_loot '7133'
+    # saw
+    pushlist item_types_loot '4148'
+    # tinker tools
+    pushlist item_types_loot '7864'
+    # sewing kit
+    pushlist item_types_loot '3997'
+endif
+
+dclicktype '3821'
+foreach item_type in item_types_loot
+    while findtype item_type any any any 2 as item
+        overhead 'found' 11
+        dclicktype item
+        wait 500
+    endwhile
+endfor

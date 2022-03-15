@@ -1,0 +1,14 @@
+if findlayer self righthand as weapon
+    clearsysmsg 
+    useskill 'poisoning'
+    wft
+    targettype 'green potion'
+    wft
+    target weapon
+    wait 3000
+    if insysmsg 'you fail to apply'
+        wait 3000
+        replay
+    endif
+endif
+hotkey 'Play Script: healing\self_keep_healing'

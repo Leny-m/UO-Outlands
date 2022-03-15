@@ -1,0 +1,207 @@
+# bag organizer
+# Run the script and select the bag
+# where you want your items. It will
+# find all the items it supports and
+# neatly place them for you.
+setvar sort_bag
+#
+# reagents
+#
+if findtype 'Blood Moss' backpack as item
+    lift item 9999
+    drop sort_bag 45 70
+    wait 600
+endif
+if findtype 'Sulfurous Ash' backpack as item
+    lift item 9999
+    drop sort_bag 60 70
+    wait 600
+endif
+if findtype 'Ginseng' backpack as item
+    lift item 9999
+    drop sort_bag 75 70
+    wait 600
+endif
+if findtype 'Mandrake Root%s%' backpack as item
+    lift item 9999
+    drop sort_bag 90 70
+    wait 600
+endif
+# SS
+if findtype '3981' backpack as item
+    lift item 9999
+    drop sort_bag 105 70
+    wait 600
+endif
+if findtype 'Garlic' backpack as item
+    lift item 9999
+    drop sort_bag 120 70
+    wait 600
+endif
+if findtype 'Nightshade' backpack as item
+    lift item 9999
+    drop sort_bag 135 70
+    wait 600
+endif
+if findtype 'Black Pearl%s%' backpack as item
+    lift item 9999
+    drop sort_bag 150 70
+    wait 600
+endif
+#
+# trapped pouches
+#
+if findtype 'pouch' backpack 38 any any as item
+    lift item 9999
+    drop sort_bag 45 85
+    wait 600
+    ignore item
+endif
+if findtype 'pouch' backpack 38 any any as item
+    lift item 9999
+    drop sort_bag 55 85
+    wait 600
+    ignore item
+endif
+if findtype 'pouch' backpack 38 any any as item
+    lift item 9999
+    drop sort_bag 65 85
+    wait 600
+    ignore item
+endif
+if findtype 'pouch' backpack 38 any any as item
+    lift item 9999
+    drop sort_bag 75 85
+    wait 600
+    ignore item
+endif
+if findtype 'pouch' backpack 38 any any as item
+    lift item 9999
+    drop sort_bag 85 85
+    wait 600
+    ignore item
+endif
+if findtype 'pouch' backpack 38 any any as item
+    lift item 9999
+    drop sort_bag 95 85
+    wait 600
+    ignore item
+endif
+if findtype 'pouch' backpack 38 any any as item
+    lift item 9999
+    drop sort_bag 105 85
+    wait 600
+    ignore item
+endif
+if findtype 'pouch' backpack 38 any any as item
+    lift item 9999
+    drop sort_bag 115 85
+    wait 600
+    ignore item
+endif
+if findtype 'pouch' backpack 38 any any as item
+    lift item 9999
+    drop sort_bag 125 85
+    wait 600
+    ignore item
+endif
+#
+# bandages
+#
+if findtype 'clean bandage%s%' backpack as item
+    lift item 9999
+    drop sort_bag 45 100
+    wait 600
+endif
+#
+# bolts
+#
+if findtype 'crossbow bolt' backpack as item
+    lift item 9999
+    drop sort_bag 60 100
+    wait 600
+endif
+#
+# adv. rope
+#
+if findtype 'rope' backpack as item
+    lift item 9999
+    drop sort_bag 75 100
+    wait 600
+endif
+#
+# potions
+#
+if findtype 'yellow potion' backpack as item
+    lift item 9999
+    drop sort_bag 44 131
+    wait 600
+endif
+if findtype 'orange potion' backpack as item
+    lift item 9999
+    drop sort_bag 54 131
+    wait 600
+endif
+if findtype 'blue potion' backpack as item
+    lift item 9999
+    drop sort_bag 64 131
+    wait 600
+endif
+if findtype 'black potion' backpack as item
+    lift item 9999
+    drop sort_bag 74 131
+    wait 600
+endif
+if findtype 'red potion' backpack as item
+    lift item 9999
+    drop sort_bag 84 131
+    wait 600
+endif
+#
+# loot bag
+#
+if findtype 'bag' backpack as item
+    lift item 9999
+    drop sort_bag 99 133
+    wait 600
+endif
+#
+# instruments
+#
+if findtype 'lap harp' backpack as item
+    lift item 9999
+    drop sort_bag 121 129
+    wait 600
+endif
+if findtype 'drum' backpack as item
+    lift item 9999
+    drop sort_bag 121 129
+    wait 600
+endif
+if findtype 'lute' backpack as item
+    lift item 9999
+    drop sort_bag 121 129
+    wait 600
+endif
+if findtype 'bamboo flute' backpack as item
+    lift item 9999
+    drop sort_bag 121 129
+    wait 600
+endif
+#
+# skinning knife
+#
+if findtype 'Elven Spellblade' backpack as item
+    lift item 9999
+    drop sort_bag 124 133
+    wait 600
+endif
+#
+# phylactery
+#
+if findtype 'phylactery' backpack as item
+    lift item 9999
+    drop sort_bag 154 132
+    wait 600
+endif
+clearignore

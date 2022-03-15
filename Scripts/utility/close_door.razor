@@ -1,0 +1,26 @@
+# made by Doughmaker
+# set value to anything other than 1 to prevent overhead msgs
+setvar talk_to_me 1
+setvar door_open_south '1702'
+setvar door_open_east '1710'
+# unused values, stored for possible script extension
+setvar door_closed_east '1709'
+setvar door_closed_south '1701'
+while hits > 0
+    if findtype door_open_south ground any any 2 as door
+        if talk_to_me = 1
+            overhead 'Closing door south' 77
+        endif
+        dclick door
+        elseif findtype door_open_east ground any any 2 as door
+        if talk_to_me = 1
+            overhead 'Closing door east' 77
+        endif
+        dclick door
+    else
+        if talk_to_me = 1
+            overhead 'Nothing to close' 77
+        endif
+    endif
+    wait 1000
+endwhile

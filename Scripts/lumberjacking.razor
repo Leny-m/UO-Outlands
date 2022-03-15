@@ -1,0 +1,46 @@
+# made by Doughmaker (OneMoreKnight#1326)
+clearsysmsg 
+setvar equip_hatchet 1
+setvar hatchet_type 3908
+while hits > 95 and weight < 580
+    if findlayer self lefthand as item
+        getlabel item label
+        if hatchet in label
+            dclick item backpack
+            waitfortarget
+            target 'self'
+            if equip_hatchet = 1
+                setvar equip_hatchet 0
+            endif
+        else
+            setvar equip_hatchet 1
+        endif
+    else
+        setvar equip_hatchet 1
+    endif
+
+    if equip_hatchet = 1
+        if findtype hatchet_type
+            overhead 'Equiping a hatchet' 44
+            dclicktype hatchet_type backpack
+            wait 500
+            replay
+        else
+            overhead 'Could not find a hatchet' 33
+            wait 500
+        endif
+    endif
+
+    while not insysmsg 'you hack' and not insysmsg 'you chop'
+        if insysmsg 'you do not see any harvestable'
+        #overhead 'Move to another tree' 33
+            wait 1000
+            break
+        endif
+        if insysmsg 'you broke your axe'
+            dclicktype hatchet_type backpack
+            wait 500
+        endif
+        wait 100
+    endwhile
+endwhile

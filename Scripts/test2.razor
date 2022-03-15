@@ -1,0 +1,16 @@
+setvar shield_type '7031'
+
+if findlayer self lefthand as shield
+    lift shield 1
+    drop backpack
+endif
+
+dclicktype 'Yellow Potion'
+
+wait 500
+
+if findtype shield_type backpack any any any as shield
+    dclick shield
+else
+    overhead 'Shield not found' 33
+endif

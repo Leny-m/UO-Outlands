@@ -1,0 +1,74 @@
+setvar force_update 0
+if not listexists mobs or force_update = 1
+    createlist mobs
+    # sorcerer
+    pushlist mobs 721
+    # doppelganger
+    pushlist mobs 777
+    # lich magus
+    pushlist mobs 24
+    # cyclops
+    pushlist mobs 75
+    # molten idol
+    pushlist mobs 22
+    # moss giant
+    pushlist mobs 380
+    # lichenid
+    pushlist mobs 285
+    # wildwood reaper
+    pushlist mobs 47
+    # minotaur runesmith
+    pushlist mobs 281
+    # minotaur
+    pushlist mobs 263
+endif
+
+if not listexists instruments
+    createlist instruments
+    pushlist instruments 'lute'
+    pushlist instruments 'harp'
+    pushlist instruments 'tambourine'
+    pushlist instruments 'flute'
+endif
+
+foreach mob in mobs
+    if findtype mob
+        clearsysmsg 
+        useskill 'Peacemaking'
+        if not insysmsg 'You must wait a few moments'
+            if insysmsg 'what instrument' or insysmsg 'target not found'
+                foreach instrument in instruments
+                    if findtype instrument
+                        dclicktype instrument
+                        break
+                    endif
+                endfor
+                overhead "No instruments!" 34
+            endif
+        endif
+        wft 500
+        targettype mob any any any 5
+        wait 100
+        if insysmsg 'That is too far away' or insysmsg 'Target cannot be seen'
+            continue
+        endif
+        attack 'last'
+        wait 5500
+        clearsysmsg 
+        useskill 'Discordance'
+        if not insysmsg 'You must wait a few moments'
+            if insysmsg 'what instrument' or insysmsg 'target not found'
+                foreach instrument in instruments
+                    if findtype instrument
+                        dclicktype instrument
+                        break
+                    endif
+                endfor
+                overhead "No instruments!" 34
+            endif
+        endif
+        wft 500
+        targettype mob any any any 5
+        break
+    endif
+endfor

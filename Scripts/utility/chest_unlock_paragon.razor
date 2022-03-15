@@ -1,0 +1,26 @@
+clearsysmsg 
+setvar rem_trap 1
+while hits > 0
+    while hits < maxhits
+        cast 'Greater Heal'
+        wft
+        target 'self'
+        wait 1000
+    endwhile
+    if rem_trap = 1
+        gumpresponse 7
+        wait 3000
+        waitforgump 736038070
+    else
+        gumpresponse 4
+        wait 3000
+        waitforgump 736038070        
+    endif
+    if insysmsg 'That appears to be devoid of traps'
+        setvar rem_trap 0
+    endif
+    if insysmsg 'You successfully pick the lock'
+        break
+    endif
+    wait 100
+endwhile

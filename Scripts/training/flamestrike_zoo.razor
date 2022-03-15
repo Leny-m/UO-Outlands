@@ -1,0 +1,12 @@
+if skill 'magery' < 85
+    if mana > 40
+        cast 'Flamestrike'
+        waitfortarget
+        target 0x3B337F
+    else
+        skill 'meditation'
+        wait 5000
+    endif
+    wait 500
+    loop
+endif

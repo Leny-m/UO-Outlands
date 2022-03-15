@@ -1,0 +1,12 @@
+if skill 'camping' < 80
+    if not findtype "kindling" backpack
+        overhead "Need more kindling" 34
+        wait 5000
+        replay
+    endif
+        
+    if not findtype "campfire" ground 0 1 1
+        dclicktype "kindling" backpack
+    endif
+    loop
+endif

@@ -1,0 +1,9 @@
+while hits > 0
+    overhead 'Healing tank' 0
+    if findtype '3617' backpack as bandage
+        dclick bandage
+        wft 500
+        target tank
+        wait 6000
+    endif
+endwhile

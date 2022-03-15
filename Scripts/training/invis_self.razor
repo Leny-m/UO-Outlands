@@ -1,0 +1,14 @@
+# 70 = shelter
+# 75 = elsewhere
+if skill 'magery' < 75
+    if mana > 28
+        cast 'Invisibility'
+        waitfortarget
+        target 'self'
+    else
+        skill 'meditation'
+        wait 5000
+    endif
+    wait 500
+    loop
+endif
