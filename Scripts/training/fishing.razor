@@ -1,8 +1,23 @@
 if findlayer self lefthand as fishing_pole
     dclick fishing_pole
     wait 9000
+elseif findtype 'fishing pole' backpack as fishing_pole
+    dress 'fishing'
+    wait 500
 else
     overhead 'No fishing pole found!' 33
     wait 5000
+endif
+if skill 'camping' < 100
+    if not findtype "kindling" backpack
+        overhead "Need more kindling" 34
+        wait 5000
+        replay
+    endif
+        
+    if not findtype "campfire" ground 0 1 1
+        dclicktype "kindling" backpack
+    endif
+    loop
 endif
 loop

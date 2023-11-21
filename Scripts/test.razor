@@ -1,10 +1,12 @@
-gumpresponse 3
-waitfortarget
-dclick 0x59AED00A
-waitforgump 1859005118
-gumpresponse 2
-waitfortarget
-waitforgump 1859005118
-target 0x5129007F
-waitforgump 1859005118
-gumpclose
+clearsysmsg 
+clearignore 
+setvar container
+
+overhead 'PRINT START'
+while findtype '5356' container as map
+    getlabel map desc
+    overhead desc
+    ignore map
+    wait 100
+endwhile
+overhead 'PRINT END'

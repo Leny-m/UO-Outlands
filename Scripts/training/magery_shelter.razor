@@ -1,0 +1,16 @@
+# not working properly
+if skill 'magery' >= 70 and skill 'magery' <= 80
+    if mana < 50
+        useskill 'meditation'
+        wait 10000
+    else
+        cast 'Polymorph'
+        wait 2000
+        if not insysmsg 'fizzles'
+            waitforgump 773193514
+            gumpresponse 21
+            wait 1000
+        endif
+    endif
+endif
+loop

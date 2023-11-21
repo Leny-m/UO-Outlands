@@ -1,0 +1,108 @@
+clearignore
+
+removelist container_graphic_ids
+createlist container_graphic_ids
+pushlist 'container_graphic_ids' 3705
+pushlist 'container_graphic_ids' 2448
+pushlist 'container_graphic_ids' 5402
+pushlist 'container_graphic_ids' 2472
+pushlist 'container_graphic_ids' 2473
+pushlist 'container_graphic_ids' 2474
+pushlist 'container_graphic_ids' 2475
+pushlist 'container_graphic_ids' 2476
+pushlist 'container_graphic_ids' 2477
+pushlist 'container_graphic_ids' 2480
+pushlist 'container_graphic_ids' 2481
+pushlist 'container_graphic_ids' 2482
+pushlist 'container_graphic_ids' 3701
+pushlist 'container_graphic_ids' 3702
+pushlist 'container_graphic_ids' 3704
+pushlist 'container_graphic_ids' 3712
+
+#
+# change these to your desired item
+#
+setvar item_type 8826
+setvar item_hue 2810
+
+while not dead
+    # hide, if possible
+    if not hidden
+        if skill 'hiding' > 80
+            useskill 'hiding'
+        elseif skill 'magery' > 80
+            cast 'invisibility'
+            wft
+            target 'self'
+        endif
+    endif    
+
+    hotkey 'Next Monster Target'
+    setvar! myLittleStinkyVar lasttarget 
+    dclick lasttarget
+    wait 600
+    #Change this to what you are searching for - first any is hue
+    while findtype item_type  myLittleStinkyVar 2767 any any as itemFound
+        getlabel itemFound desc
+        #
+        # adjust this
+        #
+        if necromancy in desc
+            sysmsg 'Item found!' 44
+            setvar currentItem itemFound       
+            
+            overhead '{{desc}}' 11
+            
+            #this is the part that buys it
+            menu itemFound 0
+            
+            # hide, if possible
+            if not hidden
+                if skill 'hiding' > 80
+                    useskill 'hiding'
+                elseif skill 'magery' > 80
+                    cast 'invisibility'
+                    wft
+                    target 'self'
+                endif
+            endif
+            
+            #Adjust this to your wait time to click buy
+            wait 5000
+        endif
+        ignore itemFound
+    endwhile
+    foreach searchContainer in 'container_graphic_ids'
+        while findtype searchContainer myLittleStinkyVar as foundContainer
+            dclick foundContainer
+            wait 600
+            #Change this to what you are searching for - first any is hue for aspect stuff
+            while findtype item_type  myLittleStinkyVar 2767 any any as itemFound
+                sysmsg 'Item found!' 44
+                setvar currentItem itemFound       
+                
+                getlabel itemFound desc
+                overhead '{{desc}}' 11
+                
+                #this is the part that buys it
+                menu itemFound 0
+                
+                # hide, if possible
+                if not hidden
+                    if skill 'hiding' > 80
+                        useskill 'hiding'
+                    elseif skill 'magery' > 80
+                        cast 'invisibility'
+                        wft
+                        target 'self'
+                    endif
+                endif
+        
+                #Adjust this to your wait time to click buy
+                wait 5000
+                ignore itemFound
+            endwhile
+            ignore foundContainer
+        endwhile
+    endfor
+endwhile

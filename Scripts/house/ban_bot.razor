@@ -1,0 +1,46 @@
+clearsysmsg 
+
+if not listexists "friendsofthehouse"
+    createlist "friendsofthehouse"
+endif
+
+if not timerexists "detectHidingPlayersTimer"
+    createtimer "detectHidingPlayersTimer"
+    settimer "detectHidingPlayersTimer" 11000
+endif
+
+if not timerexists "sayBanTimer"
+    createtimer "sayBanTimer"
+    settimer "sayBanTimer" 2000
+endif
+
+if timer "detectHidingPlayersTimer" >= 11000
+    useskill 'detectinghidden'
+    wft 500
+    target 'self'
+    settimer "detectHidingPlayersTimer" 0
+endif
+
+hotkey 'Next non-friendly player target'
+wait 200
+
+if insysmsg "no one matching"
+    // do nothing
+else 
+    @setvar! removeTarget lasttarget
+    if inlist "friendsofthehouse" removeTarget 
+        // do nothing
+    elseif timer sayBanTimer >= 2000
+        say "I ban thee" 
+        wft 1000
+        target removeTarget 
+        wait 200
+        if insysmsg "You cannot eject a friend of the house!"
+            pushlist "friendsofthehouse" removeTarget 
+        endif  
+        settimer "sayBanTimer" 0
+    endif
+endif
+
+wait 50
+loop

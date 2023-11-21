@@ -4,10 +4,12 @@
 #   vanquishing
 #   exceedingly
 #   supremely
-setvar id_source_container 0x4ED58B65
-setvar good_items_store_container 0x4A3E9333
-setvar resource_container 0x4908A425
-setvar resource_stockpile 0x59AED00A
+setvar container_with_id_items 0x4CD4EEAC
+setvar id_source_container 0x4F6B1794
+setvar good_items_store_container 0x4284120B
+setvar resource_stockpile 0x4AF6D51F
+
+clearignore 
 
 if not listexists resource_types
     createlist resource_types
@@ -136,19 +138,23 @@ if skill "Item Identification" <= 0
 endif
 
 # open the containers
-dclick 0x4908A7AC
+overhead 'Opening containers' 88
+dclick container_with_id_items
 wait 750
 dclick id_source_container
 wait 750
 dclick good_items_store_container
-wait 750
+wait 1000
 
 # id the whole source container (120 item id required)
+overhead 'Identifying all items' 88
 useskill 'itemid'
 wft
 target id_source_container
 wait 1000
 
+# sort through the items and put the good ones into the good items store container
+overhead 'Sorting items' 88
 foreach id in id_mage_weapon_items
     sysmsg id 88
     while findtype id id_source_container as item
@@ -253,32 +259,39 @@ foreach id in id_weapon_items
 endfor
 
 # recycle
-if findtype '7864' backpack as tinker_kit
-    dclick tinker_kit
-    waitforgump any
+# open resource stockpile, use saw, recycle self
+if findtype 'saw' as saw
+    overhead 'Recycling' 88
+    dclick saw
+    waitforgump 949095101
     gumpresponse 3
-    wft
+    waitfortarget
+    waitforgump 949095101
     target 'self'
-    wait 1000
+    waitforgump 949095101
+    gumpclose
+    gumpclose
     # unload the resources
     # resource stockpile interaction
-    dclick resource_stockpile
-    waitforgump 1859005118
-    gumpresponse 2
+    overhead 'Storing resources' 88
+    menu resource_stockpile 0
     wft
     target 'self'
-    waitforgump 1859005118    
-    foreach resource_type in resource_types
-        while findtype resource_type backpack as res
-            lift res 9999
-            wait 250
-            drop resource_container -1 -1 -1
-            wait 250
-        endwhile
-    endfor
+else
+    overhead 'No saw found, skipping recycling' 11
 endif
 
-gumpclose
+if findtype '12686' backpack as arcane_essence
+    overhead 'Storing arcane essence' 88
+    lift arcane_essence 9999
+    wait 250
+    if findtype '12686' container_with_id_items
+        drop container_with_id_items -1 -1 -1
+    else 
+        drop container_with_id_items 46 51 0
+    endif
+    wait 250
+endif
 
 clearignore 
 

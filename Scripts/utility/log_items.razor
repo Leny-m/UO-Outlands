@@ -1,0 +1,25 @@
+#logs can be found in Outlands\Ultima Online Outlands\ClassicUO\Data\Client\JournalLogs\
+
+clearignore 
+clearsysmsg 
+
+if not listexists items
+    createlist items
+else
+    clearlist items
+endif
+pushlist items 'aspect core'
+pushlist items 'flask'
+
+setvar bag
+
+foreach item in items
+    while findtype item bag as found_item
+        getlabel found_item desc
+        sysmsg desc
+        ignore found_item
+    endwhile
+endfor
+
+clearignore 
+clearsysmsg 

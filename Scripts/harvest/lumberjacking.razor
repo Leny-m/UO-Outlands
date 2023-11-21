@@ -1,0 +1,153 @@
+#
+# made by OneMoreKnight#1326
+#
+clearsysmsg 
+clearignore
+
+#
+# change these if needed
+#
+
+# moves all logs into a trapped pouch, duh!
+setvar move_logs_to_trapped_pouch 1
+
+# attempts to display + or - with the log amount delta
+setvar monitor_log_amount 0
+
+# attempts to equip a hatchet found by its type
+setvar equip_hatchet 1
+setvar hatchet_type 3908
+
+# cooldowns
+setvar str_pot_cd 361000
+setvar bandage_cd 11000
+
+if not timerexists str_pot_timer
+    createtimer str_pot_timer
+    settimer str_pot_timer str_pot_cd
+endif
+
+if not timerexists bandage_timer
+    createtimer bandage_timer
+    settimer bandage_timer bandage_cd
+endif
+
+while hits > 95 and weight < 580
+    # bandage
+    if hits < maxhits and timer bandage_timer > bandage_cd
+        settimer bandage_timer 0
+        hotkey 'Play Script: harvest\bandage_harvester'
+    endif
+    
+    # strength potion
+    if timer str_pot_timer > str_pot_cd
+        settimer str_pot_timer 0
+        hotkey 'Play Script: harvest\str_pot_harvester'
+    endif
+
+    if findlayer self lefthand as item
+        getlabel item label
+        if hatchet in label
+            dclick item backpack
+            waitfortarget
+            target 'self'
+            if equip_hatchet = 1
+                setvar equip_hatchet 0
+            endif
+        else
+            setvar equip_hatchet 1
+        endif
+    else
+        setvar equip_hatchet 1
+    endif
+
+    if equip_hatchet = 1
+        if findtype hatchet_type
+            overhead 'Equiping a hatchet' 44
+            dclicktype hatchet_type backpack
+            wait 500
+            replay
+        else
+            overhead 'Could not find a hatchet' 33
+            wait 500
+        endif
+    endif
+
+    while not insysmsg 'you hack' and not insysmsg 'you chop'
+        if insysmsg 'you do not see any harvestable'
+            wait 1000
+            break
+        endif
+        if insysmsg 'have recently traveled'
+            wait 1000
+            break
+        endif
+        if insysmsg 'you must wait'
+            wait 1000
+            break
+        endif        
+        if insysmsg 'you have gained'
+            break
+        endif    
+        if hits < 100
+            break
+        endif
+        if insysmsg 'you broke your axe'
+            dclicktype hatchet_type backpack
+            wait 500
+        endif
+        wait 100
+    endwhile
+    
+    if monitor_log_amount = 1
+        if monitored_item_type != '7133'
+            @setvar! monitored_item_type '7133'
+            @setvar! previous_amount 0
+        endif
+
+        if counttype monitored_item_type backpack 0 as amount
+            if amount != previous_amount
+                if amount > previous_amount
+                    overhead '{{amount}} (+)' 77
+                else
+                    overhead '{{amount}} (-)' 33
+                endif
+                @setvar! previous_amount amount
+            endif
+            wait 100
+        endif
+    endif
+    
+    if move_logs_to_trapped_pouch = 1
+        if trapped_pouch != '3705'
+            @setvar! trapped_pouch '3705'
+            @setvar! trapped_pouch_hue '38'
+        endif
+
+        if not listexists trapped_pouch_items
+            createlist trapped_pouch_items
+        else
+            clearlist trapped_pouch_items
+        endif    
+        # log, any color
+        pushlist trapped_pouch_items '7133'
+
+        if findtype trapped_pouch backpack trapped_pouch_hue as found_trapped_pouch
+            if poplist trapped_pouch_items back as item
+                if findtype item backpack as found_item
+                    lift found_item 9999
+                    drop found_trapped_pouch -1 -1 0
+                    ignore found_item
+                    wait 500
+                endif
+            endif
+        else
+            overhead 'No trapped pouches found!' 33
+        endif    
+    endif
+endwhile
+
+if hits < 95
+    overhead 'HP bellow 95, terminating.' 0
+    stop
+endif

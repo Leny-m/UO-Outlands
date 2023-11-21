@@ -1,0 +1,26 @@
+#
+# made by OneMoreKnight#1326
+#
+clearignore
+
+setvar move_items_to_this_container
+
+if not listexists trapped_pouch_items
+    createlist trapped_pouch_items
+else
+    clearlist trapped_pouch_items
+endif    
+
+# log, any color
+pushlist trapped_pouch_items '7133'
+# ingot, any color
+pushlist trapped_pouch_items '7154'
+
+if poplist trapped_pouch_items back as item
+    while findtype item backpack as found_item
+        lift found_item 9999
+        drop move_items_to_this_container -1 -1 0
+        ignore found_item
+        wait 500
+    endwhile
+endif

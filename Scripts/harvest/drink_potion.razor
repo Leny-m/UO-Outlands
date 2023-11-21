@@ -1,0 +1,22 @@
+if listexists potions_to_drink and list potions_to_drink >= 1
+    foreach potion_to_drink in potions_to_drink
+        if findtype potion_to_drink backpack as pot
+            if findlayer self lefthand as equipped_item
+                lift equipped_item 1
+                drop backpack
+                dclick pot 
+                wait 500
+                dclick equipped_item
+                wait 500
+            else
+                dclick pot 
+            endif
+        else
+            overhead 'Potion not found.' 33
+        endif
+    endfor
+else
+    overhead 'List potions_to_drink does not exist This script should not be run directly.' 33
+endif
+clearlist potions_to_drink
+hotkey 'Play Script: harvest\lumberjacking'

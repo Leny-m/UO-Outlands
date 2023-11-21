@@ -1,21 +1,25 @@
 # made by Doughmaker (OneMoreKnight#1326)
 # restock - 1 = 10 x recall
-setvar storage_shelf 0x45FA236B
-setvar resource_stockpile 0x59AED00A
-setvar bank_safe 0x4F987CF9
-setvar core_bag 0x41259355
-setvar map_bag 0x43C1EAA0
-setvar dye_bag 0x43735ED8
-setvar resource_bag 0x4D90556B
-setvar unidentified_bag 0x4ED58B65
-setvar main_loot_chest 0x4908A425
-setvar recall_container 0x4908A425
+setvar storage_shelf 0x53D94FF5
+setvar resource_stockpile 0x4AF6D51F
+setvar bank_safe 0x4CACEFE7
+setvar core_bag 0x55542A6D
+setvar map_bag 0x55542A6C
+setvar dye_bag 0x554F354E
+setvar resource_stockpile 0x4AF6D51F
+setvar unidentified_bag 0x4F6B1794
+setvar main_loot_chest 0x47BA5A94
+setvar recall_container 0x4CD4EEAC
 
 setvar force_update 0
 
 clearignore 
 useskill 'hiding'
 wait 100
+
+if not listexists item_types_loot or force_update = 1
+    createlist item_types_loot
+endif
 
 #
 # Main loot chest
@@ -56,10 +60,14 @@ if not listexists core_bag_types or force_update = 1
     pushlist core_bag_types '29030'
     # extract
     pushlist core_bag_types '3836'
+    # distillation
+    pushlist item_types_loot '17686'    
     # MCD
     pushlist core_bag_types '17087'
-    # Distillation
+    # distillation
     pushlist core_bag_types 'flask'
+    # aspect kit
+    pushlist item_types_loot '42519'    
 endif
 
 #
@@ -71,6 +79,10 @@ if not listexists map_bag_types or force_update = 1
     pushlist map_bag_types '29348'
     # map
     pushlist map_bag_types 'map'
+    # research materials
+    pushlist item_types_loot '24434'
+    # soul jar
+    pushlist item_types_loot '43423'    
 endif
 
 #
@@ -89,29 +101,12 @@ if not listexists dye_bag_types or force_update = 1
     pushlist dye_bag_types 'seed of renewal'
     pushlist dye_bag_types 'folded cloth'
     pushlist dye_bag_types 'rune'
-endif
-
-#
-# Resource bag
-#
-if not listexists resource_bag_types or force_update = 1
-    createlist resource_bag_types
-    # leather
-    pushlist resource_bag_types '4225'
-    # meat
-    pushlist resource_bag_types '2545'
-    # any log
-    pushlist resource_bag_types '7133'
-    # gems
-    pushlist resource_bag_types 'amethyst%s%'
-    pushlist resource_bag_types 'emerald%s%'
-    pushlist resource_bag_types 'citrine%s%'
-    pushlist resource_bag_types 'piece%s% of amber'
-    pushlist resource_bag_types 'sapphire%s%'
-    pushlist resource_bag_types 'star sapphire%s%'
-    pushlist resource_bag_types 'diamond%s%'
-    pushlist resource_bag_types 'rub%ies/y%'
-    pushlist resource_bag_types 'tourmaline%s%'
+    # backpack dye
+    pushlist dye_bag_types '3839'
+    # dyeable rug tile
+    pushlist item_types_loot '4248'
+    # dyeable gilded gold carpet tile
+    pushlist item_types_loot '43166'   
 endif
 
 #
@@ -228,26 +223,25 @@ endif
 #pushlist item_types_loot '29001'
 
 # resource stockpile interaction
+overhead 'Unloading into the resource stockpile' 77
 dclick resource_stockpile
-waitforgump 1859005118
-gumpresponse 2
-wft
+menu resource_stockpile 0
+waitfortarget
 target 'self'
-waitforgump 1859005118
+gumpclose
 
 # storage shelf interaction
-dclick storage_shelf
-waitforgump 3232825965
-gumpresponse 4
-wft
+# unload
+overhead 'Unloading into the storage shelf' 77
+menu storage_shelf 0
+waitfortarget
 target 'self'
 waitforgump 3232825965
-gumpresponse 7
-waitforgump 3232825965
+gumpclose
 
 overhead 'Main loot chest' 77
-foreach item_type in main_loot_chest_types
-    while findtype item_type backpack as item
+foreach main_loot_chest_type in main_loot_chest_types
+    while findtype main_loot_chest_type backpack as item
         lift item 9999
         drop main_loot_chest -1 -1 0
         wait 500
@@ -255,8 +249,8 @@ foreach item_type in main_loot_chest_types
 endfor
 
 overhead 'Bank safe' 77
-foreach item_type in bank_safe_types
-    while findtype item_type backpack as item
+foreach bank_safe_types in bank_safe_types
+    while findtype bank_safe_types backpack as item
         lift item 9999
         drop bank_safe -1 -1 0
         wait 500
@@ -264,8 +258,8 @@ foreach item_type in bank_safe_types
 endfor
 
 overhead 'Core bag' 77
-foreach item_type in core_bag_types
-    while findtype item_type backpack as item
+foreach core_bag_type in core_bag_types
+    while findtype core_bag_type backpack as item
         lift item 9999
         drop core_bag -1 -1 0
         wait 500
@@ -273,8 +267,8 @@ foreach item_type in core_bag_types
 endfor
 
 overhead 'Map bag' 77
-foreach item_type in map_bag_types
-    while findtype item_type backpack as item
+foreach map_bag_type in map_bag_types
+    while findtype map_bag_type backpack as item
         lift item 9999
         drop map_bag -1 -1 0
         wait 500
@@ -282,26 +276,17 @@ foreach item_type in map_bag_types
 endfor
 
 overhead 'Dye bag' 77
-foreach item_type in dye_bag_types
-    while findtype item_type backpack as item
+foreach dye_bag_type in dye_bag_types
+    while findtype dye_bag_type backpack as item
         lift item 9999
         drop dye_bag -1 -1 0
         wait 500
     endwhile
 endfor
 
-overhead 'Resource bag' 77
-foreach item_type in resource_bag_types
-    while findtype item_type backpack as item
-        lift item 9999
-        drop resource_bag -1 -1 0
-        wait 500
-    endwhile
-endfor
-
 overhead 'Unidentified bag' 77
-foreach item_type in item_types_magic
-    while findtype item_type backpack as item
+foreach item_type_magic in item_types_magic
+    while findtype item_type_magic backpack as item
         getlabel item description
         if unidentified in description
             lift item 9999
@@ -310,6 +295,15 @@ foreach item_type in item_types_magic
         else
             ignore item
         endif
+    endwhile
+endfor
+
+overhead 'Random bag' 77
+foreach item_type_loot in item_types_loot
+    while findtype item_type_loot backpack as item
+        lift item 9999
+        drop core_bag -1 -1 0
+        wait 500
     endwhile
 endfor
 
@@ -332,5 +326,9 @@ if findtype '8012' backpack as recalls
     drop recall_container -1 -1 -1
     wait 750
 endif
+
+# storage shelf interaction
+# load
+menu storage_shelf 1
 
 overhead 'Done!' 77
