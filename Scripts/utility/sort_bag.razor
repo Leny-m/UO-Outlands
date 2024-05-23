@@ -1,0 +1,284 @@
+# bag organizer
+# Run the script and select the bag
+# where you want your items. It will
+# find all the items it supports and
+# neatly place them for you.
+setvar force_update 0
+if not varexist sort_bag or force_update = 1 or not find sort_bag
+    @setvar! sort_bag
+    wft 1000
+endif
+
+overhead 'Sorting container' 77
+
+#
+# reagents
+#
+if findtype 'Blood Moss' backpack as item
+    lift item 9999
+    drop sort_bag 45 70
+    wait 600
+    ignore item
+endif
+if findtype 'Sulfurous Ash' backpack as item
+    lift item 9999
+    drop sort_bag 60 70
+    wait 600
+    ignore item
+endif
+if findtype 'Ginseng' backpack as item
+    lift item 9999
+    drop sort_bag 75 70
+    wait 600
+    ignore item
+endif
+if findtype 'Mandrake Root%s%' backpack as item
+    lift item 9999
+    drop sort_bag 90 70
+    wait 600
+    ignore item
+endif
+# SS
+if findtype '3981' backpack as item
+    lift item 9999
+    drop sort_bag 105 70
+    wait 600
+    ignore item
+endif
+if findtype 'Garlic' backpack as item
+    lift item 9999
+    drop sort_bag 120 70
+    wait 600
+    ignore item
+endif
+if findtype 'Nightshade' backpack as item
+    lift item 9999
+    drop sort_bag 135 70
+    wait 600
+    ignore item
+endif
+if findtype 'Black Pearl%s%' backpack as item
+    lift item 9999
+    drop sort_bag 150 70
+    wait 600
+    ignore item
+endif
+#
+# trapped pouches
+#
+if findtype 'pouch' backpack 38 any any as item
+    lift item 9999
+    drop sort_bag 45 85
+    wait 600
+    ignore item
+endif
+if findtype 'pouch' backpack 38 any any as item
+    lift item 9999
+    drop sort_bag 55 85
+    wait 600
+    ignore item
+endif
+if findtype 'pouch' backpack 38 any any as item
+    lift item 9999
+    drop sort_bag 65 85
+    wait 600
+    ignore item
+endif
+if findtype 'pouch' backpack 38 any any as item
+    lift item 9999
+    drop sort_bag 75 85
+    wait 600
+    ignore item
+endif
+if findtype 'pouch' backpack 38 any any as item
+    lift item 9999
+    drop sort_bag 85 85
+    wait 600
+    ignore item
+endif
+if findtype 'pouch' backpack 38 any any as item
+    lift item 9999
+    drop sort_bag 95 85
+    wait 600
+    ignore item
+endif
+if findtype 'pouch' backpack 38 any any as item
+    lift item 9999
+    drop sort_bag 105 85
+    wait 600
+    ignore item
+endif
+if findtype 'pouch' backpack 38 any any as item
+    lift item 9999
+    drop sort_bag 115 85
+    wait 600
+    ignore item
+endif
+if findtype 'pouch' backpack 38 any any as item
+    lift item 9999
+    drop sort_bag 125 85
+    wait 600
+    ignore item
+endif
+#
+# bandages
+#
+if findtype 'clean bandage%s%' backpack as item
+    lift item 9999
+    drop sort_bag 45 100
+    wait 600
+    ignore item
+endif
+#
+# bolts
+#
+if findtype 'crossbow bolt' backpack as item
+    lift item 9999
+    drop sort_bag 60 100
+    wait 600
+    ignore item
+endif
+#
+# adv. rope
+#
+if findtype 'rope' backpack as item
+    lift item 9999
+    drop sort_bag 75 100
+    wait 600
+    ignore item
+endif
+
+#
+# potions
+#
+if listexists coord_x
+    clearlist coord_x
+else
+    createlist coord_x
+endif
+pushlist coord_x 44
+pushlist coord_x 54
+pushlist coord_x 64
+pushlist coord_x 74
+pushlist coord_x 84
+pushlist coord_x 94
+pushlist coord_x 104
+
+if listexists pot_types
+    clearlist pot_types
+else
+    createlist pot_types
+endif
+pushlist pot_types 'yellow potion'
+pushlist pot_types 'orange potion'
+pushlist pot_types 'blue potion'
+pushlist pot_types 'black potion'
+pushlist pot_types 'red potion'
+pushlist pot_types 'white potion'
+pushlist pot_types 'green potion'
+
+foreach pot_type in pot_types
+    if findtype pot_type backpack as item
+        if poplist coord_x front as x
+            lift item 9999
+            drop sort_bag x 131
+            wait 600
+            ignore item
+        endif
+    endif    
+endfor
+
+#
+# loot bag
+#
+if findtype 'bag' backpack as item
+    lift item 9999
+    drop sort_bag 99 133
+    wait 600
+    ignore item
+endif
+#
+# instruments
+#
+if findtype 'lap harp' backpack as item
+    lift item 9999
+    drop sort_bag 121 129
+    wait 600
+    ignore item
+endif
+if findtype 'drum' backpack as item
+    lift item 9999
+    drop sort_bag 121 129
+    wait 600
+    ignore item
+endif
+if findtype 'lute' backpack as item
+    lift item 9999
+    drop sort_bag 121 129
+    wait 600
+    ignore item
+endif
+if findtype 'bamboo flute' backpack as item
+    lift item 9999
+    drop sort_bag 121 129
+    wait 600
+    ignore item
+endif
+#
+# skinning knife
+#
+if findtype 'Elven Spellblade' backpack as item
+    lift item 9999
+    drop sort_bag 124 133
+    wait 600
+    ignore item
+endif
+#
+# phylactery
+#
+if findtype 'phylactery' backpack as item
+    lift item 9999
+    drop sort_bag 154 132
+    wait 600
+    ignore item
+endif
+#
+# kindling
+#
+if findtype 'kindling' backpack as item
+    lift item 9999
+    drop sort_bag 100 100
+    wait 600
+    ignore item
+endif
+#
+# tray = food
+#
+if findtype 'tray' backpack as item
+    lift item 9999
+    drop sort_bag 135 100
+    wait 600
+    ignore item
+endif
+#
+# shepherd"s crook
+#
+if findtype '3713' backpack as item
+    lift item 9999
+    drop sort_bag 158 65
+    wait 600
+    dclick item
+    ignore item
+endif
+#
+# veterinary supplies
+#
+if findtype 'veterinary supplies' backpack as item
+    lift item 9999
+    drop sort_bag 156 94
+    wait 600
+    ignore item
+endif
+clearignore
+
+overhead 'Done sorting container' 77

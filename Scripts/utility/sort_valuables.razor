@@ -400,6 +400,11 @@ pushlist coord_x 75
 pushlist coord_x 85
 pushlist coord_x 95
 pushlist coord_x 105
+pushlist coord_x 115
+pushlist coord_x 125
+pushlist coord_x 135
+pushlist coord_x 145
+pushlist coord_x 155
 
 if not listexists coord_y
     createlist coord_y
@@ -425,22 +430,44 @@ pushlist coord_y 80
 pushlist coord_y 80
 pushlist coord_y 80
 pushlist coord_y 80
+pushlist coord_y 80
+pushlist coord_y 80
+pushlist coord_y 80
+pushlist coord_y 80
+pushlist coord_y 80
+
+
+if not listexists ss_hues
+    createlist ss_hues
+else
+    clearlist ss_hues
+endif
+pushlist ss_hues 2810
+pushlist ss_hues 2479
+pushlist ss_hues 2291
+pushlist ss_hues 2768
+pushlist ss_hues 2722
+pushlist ss_hues 2735
+pushlist ss_hues 2642
+pushlist ss_hues 2564
 
 overhead 'Sorting Skill Scrolls' 88
-while findtype 'scroll of calling' sort_bag as item
-    getlabel item desc
-    if 'skill mastery scroll' in desc
-        if poplist coord_x front as x
-            if poplist coord_y front as y
-                lift item 9999
-                drop sort_bag x y
-                wait 600
-                ignore item
+foreach ss_hue in ss_hues
+    while findtype 'scroll of calling' sort_bag ss_hue as item
+        getlabel item desc
+        if 'skill mastery scroll' in desc
+            if poplist coord_x front as x
+                if poplist coord_y front as y
+                    lift item 9999
+                    drop sort_bag x y
+                    wait 600
+                    ignore item
+                endif
             endif
         endif
-    endif
-    ignore item
-endwhile
+        ignore item
+    endwhile
+endfor
 
 
 #
@@ -456,10 +483,10 @@ pushlist map_names 'level 1'
 pushlist map_names 'level 2'
 pushlist map_names 'level 3'
 pushlist map_names 'level 4'
-#pushlist map_names 'level 5'
-#pushlist map_names 'level 6'
-#pushlist map_names 'level 7'
-#pushlist map_names 'level 8'
+pushlist map_names 'level 5'
+pushlist map_names 'level 6'
+pushlist map_names 'level 7'
+pushlist map_names 'level 8'
 
 if not listexists coord_y
     createlist coord_y
@@ -467,13 +494,13 @@ else
     clearlist coord_y
 endif
 pushlist coord_y 65
+pushlist coord_y 75
 pushlist coord_y 85
+pushlist coord_y 95
 pushlist coord_y 105
+pushlist coord_y 115
 pushlist coord_y 125
-#pushlist coord_y 135
-#pushlist coord_y 145
-#pushlist coord_y 155
-#pushlist coord_y 165
+pushlist coord_y 135
 
 if not listexists coord_x
     createlist coord_x

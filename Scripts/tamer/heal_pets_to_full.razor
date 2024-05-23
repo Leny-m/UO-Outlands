@@ -1,0 +1,67 @@
+setvar a_done 0
+setvar b_done 0
+
+clearsysmsg 
+
+while not dead 
+    if a_done == 0 or b_done == 0
+        if findtype '3617' backpack as bandage
+            dclick bandage
+            wft
+            if a_done == 0
+                target pet_a
+                wait 500
+                if insysmsg 'That being is not damaged!'
+                    setvar a_done 1
+                else
+                    if mana > 50
+                        cast 'greater heal'
+                        wft
+                        target pet_a
+                        wait 200
+                        cast 'greater heal'
+                        wft
+                        target pet_a
+                        wait 200
+                        cast 'greater heal'
+                        wft
+                        target pet_a
+                        wait 200
+                    else
+                        wait 5500
+                    endif
+                endif
+            elseif b_done == 0
+                target pet_b
+                wait 500
+                if insysmsg 'That being is not damaged!'
+                    setvar b_done 1
+                else
+                    if mana > 50
+                        cast 'greater heal'
+                        wft
+                        target pet_b
+                        wait 200
+                        cast 'greater heal'
+                        wft
+                        target pet_b
+                        wait 200
+                        cast 'greater heal'
+                        wft
+                        target pet_b
+                        wait 200
+                    else
+                        wait 5500
+                    endif
+                endif        
+            else
+                stop
+            endif
+        else
+            overhead 'Out of bandages!' 33
+        endif
+    endif
+endwhile
+
+wait 100
+hotkey 'Cancel current target'

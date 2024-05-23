@@ -1,0 +1,8 @@
+cast 'Fireball'
+if not cooldown 'Fireball'
+    while not targetexists 
+    endwhile
+    while targetexists 
+    endwhile
+    cooldown 'Fireball' 20000
+endif

@@ -1,0 +1,8 @@
+cast 'Lightning'
+if not cooldown 'Lightning'
+    while not targetexists 
+    endwhile
+    while targetexists 
+    endwhile
+    cooldown 'Lightning' 20000
+endif

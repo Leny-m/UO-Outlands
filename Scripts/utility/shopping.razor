@@ -1,12 +1,14 @@
-removelist 'vendorId'
-createlist 'vendorId'
-pushlist 'vendorId' 219519
-
+@setvar! timeout 1000
+@setvar! vendorID 2606692
 while not dead
-    hotkey 'Next Monster Target'
-    setvar! myLittleStinkyVar lasttarget 
-    if inlist 'vendorId' myLittleStinkyVar
-        dclick lasttarget
-        break
+  if find vendorID ground -1 -1 20
+    overhead "● ▼▼ HERE ▼▼ ●" 88 vendorID
+    if findtype 3701 vendorID as pack
+      dclick pack
+      wait timeout
+      
     endif
+    stop
+  endif
+  wait 500
 endwhile

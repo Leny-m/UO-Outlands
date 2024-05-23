@@ -7,7 +7,7 @@ setvar core_bag 0x55542A6D
 setvar map_bag 0x55542A6C
 setvar dye_bag 0x554F354E
 setvar resource_stockpile 0x4AF6D51F
-setvar unidentified_bag 0x4F6B1794
+setvar unidentified_bag 0x4341F786
 setvar main_loot_chest 0x47BA5A94
 setvar recall_container 0x4CD4EEAC
 
@@ -209,6 +209,71 @@ if not listexists item_types_magic or force_update = 1
     pushlist item_types_magic "3571"
     pushlist item_types_magic "slayer wand"
     pushlist item_types_magic "studded gloves"
+    pushlist item_types_magic "bladed staff"
+    pushlist item_types_magic "giant spiked club"
+    pushlist item_types_magic "flanged mace"
+    pushlist item_types_magic "darklight staff"
+    pushlist item_types_magic "gemshorn"
+    pushlist item_types_magic "parrying gauche"    
+    pushlist item_types_magic "great mace"
+    pushlist item_types_magic "long bow"
+    pushlist item_types_magic "sabre"    
+    pushlist item_types_magic "razorcrest staff"
+    pushlist item_types_magic "cudgel"
+    pushlist item_types_magic "kukri"    
+    pushlist item_types_magic "stubnose crossbow"    
+    pushlist item_types_magic "shaman staff"
+    pushlist item_types_magic "rapier"
+    pushlist item_types_magic "boneshard staff"
+    pushlist item_types_magic "abyssal staff"    
+    pushlist item_types_magic "recurve bow"  
+    pushlist item_types_magic "sarissa"   
+    pushlist item_types_magic "helix staff" 
+    pushlist item_types_magic "fistblade"
+    pushlist item_types_magic "tracker knife"
+    pushlist item_types_magic "composite bow"
+    pushlist item_types_magic "harpoon"    
+    pushlist item_types_magic "flail"  
+    pushlist item_types_magic "trident"    
+    pushlist item_types_magic "skull club"    
+    pushlist item_types_magic "druid staff"    
+    pushlist item_types_magic "angelspire staff"     
+    pushlist item_types_magic "giant club"    
+    pushlist item_types_magic "tower guard crossbow"    
+    pushlist item_types_magic "fiendish staff"      
+    pushlist item_types_magic "epee"    
+    pushlist item_types_magic "burial staff"   
+    pushlist item_types_magic "balestra"    
+    pushlist item_types_magic "norse axe"        
+    pushlist item_types_magic "vine staff"    
+    pushlist item_types_magic "ancestral staff"   
+    pushlist item_types_magic "summoner staff"   
+    pushlist item_types_magic "giant axe"      
+    pushlist item_types_magic "dragonbone staff"     
+    pushlist item_types_magic "sledgehammer"     
+    pushlist item_types_magic "chaos staff"  
+    pushlist item_types_magic "nautilus staff"     
+    pushlist item_types_magic "assassins dagger"     
+    pushlist item_types_magic "chain skirt"
+    pushlist item_types_magic "ringmail skirt"
+    pushlist item_types_magic "plate skirt"
+    pushlist item_types_magic "bone shield"
+    pushlist item_types_magic "ringmail gorget"
+    pushlist item_types_magic "chain gloves"
+    pushlist item_types_magic "Chaos shield"
+    pushlist item_types_magic "studded skirt"
+    pushlist item_types_magic "chain gorget"
+    pushlist item_types_magic "chain arms"
+    pushlist item_types_magic "bone skirt"
+    pushlist item_types_magic "bone gorget"
+    pushlist item_types_magic "leather jerkin"
+    pushlist item_types_magic "caesti" 
+    pushlist item_types_magic "studded cap"      
+    pushlist item_types_magic "hurdy gurdy"
+    pushlist item_types_magic "sackbut"    
+    pushlist item_types_magic "vielle"
+    pushlist item_types_magic "psaltery"
+    pushlist item_types_magic "shawm"        
 endif
 
 # saw
@@ -331,4 +396,28 @@ endif
 # load
 menu storage_shelf 1
 
-overhead 'Done!' 77
+wait 500
+
+# ignore character backpacks
+# Chlupata Veverka
+ignore 0x5129007F
+# Fofrspageta
+ignore 0x424C8EF7
+# Doughmaker
+ignore 0x4A7F6039
+# Zasobovani
+ignore 0x410E5C7A
+
+if findtype 3701 backpack as bag_to_sort
+    lift bag_to_sort 1
+    wait 750
+    drop backpack 156 137
+    wait 750
+    dclick bag_to_sort
+    wait 750
+    @setvar! sort_bag bag_to_sort
+endif     
+
+hotkey 'Play Script: utility\sort_bag'
+
+overhead 'Done transfering loot and restocking' 77

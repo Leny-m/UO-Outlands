@@ -1,0 +1,13 @@
+while not dead
+    while not gumpexists 3773199800 and findtype "blue moongate" ground -1 1 2 as jGate
+        dclick jGate
+    endwhile
+
+    if gumpexists 3773199800 and findtype "blue moongate" ground -1 1 2 as jGate
+        while gumpexists 3773199800 and findtype "blue moongate" ground -1 1 2 as jGate
+            gumpresponse 2 3773199800
+            wait 200
+        endwhile
+        stop
+    endif
+endwhile

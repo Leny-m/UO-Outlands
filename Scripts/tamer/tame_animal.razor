@@ -1,0 +1,34 @@
+@setvar! vetTimerCd 8000
+
+if not timerexists 'vetTimer'
+    settimer vetTimer vetTimerCd
+endif
+
+@setvar! tame_animal
+
+if not varexist tank_pet 
+    overhead 'Please select your tanking pet' 88
+    @setvar! tank_pet
+    wft 500
+endif
+
+while hits > 0
+    if timer 'vetTimer' > vetTimerCd
+        if not bandaging and findtype "clean bandage%s%|veterinary supplies" backpack as item
+            dclick item
+            wft 500
+            target tank_pet
+            wait 200
+            hotkey 'Cancel current target'
+        endif
+
+        if insysmsg 'not damaged'
+            settimer 'vetTimer' 4000
+        else
+            settimer 'vetTimer' 0
+        endif
+    endif 
+    useskill 'taming'
+    wft 500
+    target tame_animal
+endwhile

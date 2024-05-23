@@ -1,9 +1,13 @@
 setvar veterinary_target
-while hits > 0
+while hits > 0 and skill 'veterinary' < 120
     target veterinary_target
     dclicktype 'clean bandage%s%'
     waitfortarget
     target veterinary_target
-    wait 6000
+    wait 1000
+    if not insysmsg 'not damaged'
+        wait 5000
+    endif
+    hotkey 'Cancel current target'
 endwhile
-loop
+say 'all follow'

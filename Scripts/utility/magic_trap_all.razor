@@ -1,0 +1,11 @@
+while findtype 'pouch' backpack 0 as p
+    cast 'Magic trap'
+    wft
+    target self
+    wait 500
+    while mana < 15
+        wait 500
+        useskill 'meditation'
+        wait 20000
+    endwhile
+endwhile    

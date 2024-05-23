@@ -1,0 +1,8 @@
+ignore 0x5129007F
+if findtype 3701 backpack as bag_to_sort
+    overhead 'sort bag found'
+    lift bag_to_sort 1
+    wait 750
+    drop backpack 156 137
+    @setvar! sort_bag bag_to_sort
+endif  

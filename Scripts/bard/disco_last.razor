@@ -1,0 +1,23 @@
+if not listexists instruments
+    createlist instruments
+    pushlist instruments 'lute'
+    pushlist instruments 'harp'
+    pushlist instruments 'tambourine'
+    pushlist instruments 'flute'
+endif
+
+clearsysmsg 
+useskill 'Discordance'
+wft 500
+target barding_target
+if not insysmsg 'You must wait a few moments'
+    if insysmsg 'what instrument' or insysmsg 'target not found'
+        foreach instrument in instruments
+            if findtype instrument
+                dclicktype instrument
+                break
+            endif
+        endfor
+        overhead "No instruments!" 34
+    endif
+endif

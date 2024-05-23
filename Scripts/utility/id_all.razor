@@ -1,11 +1,11 @@
 # Additional Info: 
 #   This script only saves the following:
-#   power
+#   invulnerability
 #   vanquishing
 #   exceedingly
 #   supremely
 setvar container_with_id_items 0x4CD4EEAC
-setvar id_source_container 0x4F6B1794
+setvar id_source_container 0x47F110B3
 setvar good_items_store_container 0x4284120B
 setvar resource_stockpile 0x4AF6D51F
 
@@ -58,6 +58,50 @@ if not listexists id_weapon_items
     pushlist id_weapon_items "crossbow"
     pushlist id_weapon_items "heavy crossbow"
     pushlist id_weapon_items "bladed staff"
+    pushlist id_weapon_items "giant spiked club"
+    pushlist id_weapon_items "flanged mace"
+    pushlist id_weapon_items "darklight staff"
+    pushlist id_weapon_items "gemshorn"
+    pushlist id_weapon_items "parrying gauche"    
+    pushlist id_weapon_items "great mace"
+    pushlist id_weapon_items "long bow"
+    pushlist id_weapon_items "sabre"    
+    pushlist id_weapon_items "razorcrest staff"
+    pushlist id_weapon_items "cudgel"
+    pushlist id_weapon_items "kukri"    
+    pushlist id_weapon_items "stubnose crossbow"    
+    pushlist id_weapon_items "shaman staff"
+    pushlist id_weapon_items "rapier"
+    pushlist id_weapon_items "boneshard staff"
+    pushlist id_weapon_items "abyssal staff"    
+    pushlist id_weapon_items "recurve bow"  
+    pushlist id_weapon_items "sarissa"   
+    pushlist id_weapon_items "helix staff" 
+    pushlist id_weapon_items "fistblade"
+    pushlist id_weapon_items "tracker knife"
+    pushlist id_weapon_items "composite bow"
+    pushlist id_weapon_items "harpoon"    
+    pushlist id_weapon_items "flail"  
+    pushlist id_weapon_items "trident"    
+    pushlist id_weapon_items "skull club"    
+    pushlist id_weapon_items "druid staff"    
+    pushlist id_weapon_items "angelspire staff"     
+    pushlist id_weapon_items "giant club"    
+    pushlist id_weapon_items "tower guard crossbow"    
+    pushlist id_weapon_items "fiendish staff"      
+    pushlist id_weapon_items "epee"    
+    pushlist id_weapon_items "burial staff"   
+    pushlist id_weapon_items "balestra"    
+    pushlist id_weapon_items "norse axe"        
+    pushlist id_weapon_items "vine staff"    
+    pushlist id_weapon_items "ancestral staff"   
+    pushlist id_weapon_items "summoner staff"   
+    pushlist id_weapon_items "giant axe"      
+    pushlist id_weapon_items "dragonbone staff"     
+    pushlist id_weapon_items "sledgehammer"     
+    pushlist id_weapon_items "chaos staff"  
+    pushlist id_weapon_items "nautilus staff"     
+    pushlist id_weapon_items "assassins dagger"    
 endif
 
 if not listexists id_armor_items
@@ -113,6 +157,21 @@ if not listexists id_armor_items
     pushlist id_armor_items "Chaos shield"
     pushlist id_armor_items "Order shield"
     pushlist id_armor_items "studded gloves"
+    pushlist id_armor_items "chain skirt"
+    pushlist id_armor_items "ringmail skirt"
+    pushlist id_armor_items "plate skirt"
+    pushlist id_armor_items "bone shield"
+    pushlist id_armor_items "ringmail gorget"
+    pushlist id_armor_items "chain gloves"
+    pushlist id_armor_items "Chaos shield"
+    pushlist id_armor_items "studded skirt"
+    pushlist id_armor_items "chain gorget"
+    pushlist id_armor_items "chain arms"
+    pushlist id_armor_items "bone skirt"
+    pushlist id_armor_items "bone gorget"
+    pushlist id_armor_items "leather jerkin"
+    pushlist id_armor_items "caesti" 
+    pushlist id_armor_items "studded cap"    
 endif
 
 if not listexists id_bard_items
@@ -122,6 +181,11 @@ if not listexists id_bard_items
     pushlist id_bard_items "lute"
     pushlist id_bard_items "bamboo flute"
     pushlist id_bard_items "tambourine"
+    pushlist id_bard_items "hurdy gurdy"
+    pushlist id_bard_items "sackbut"    
+    pushlist id_bard_items "vielle"
+    pushlist id_bard_items "psaltery"
+    pushlist id_bard_items "shawm"       
 endif
 
 if not listexists id_mage_weapon_items
@@ -130,6 +194,12 @@ if not listexists id_mage_weapon_items
     pushlist id_mage_weapon_items "3570"
     pushlist id_mage_weapon_items "3571"
     pushlist id_mage_weapon_items "3572"
+endif
+
+if not listexists exception_items
+    createlist exception_items
+    #pushlist exception_items "bardiche"
+    #pushlist exception_items "halberd"
 endif
 
 if skill "Item Identification" <= 0
@@ -153,6 +223,21 @@ wft
 target id_source_container
 wait 1000
 
+# move exceptions
+overhead 'Moving exceptions' 88
+foreach id in exception_items
+    sysmsg id 77
+    while findtype id id_source_container as item
+        getlabel item description
+        overhead description 77        
+        lift item
+        wait 250
+        drop good_items_store_container -1 -1 -1
+        ignore item
+        wait 250
+    endwhile
+endfor
+
 # sort through the items and put the good ones into the good items store container
 overhead 'Sorting items' 88
 foreach id in id_mage_weapon_items
@@ -165,7 +250,7 @@ foreach id in id_mage_weapon_items
             wft 500
             target item
             wait 2000
-        elseif power in description or vanquishing in description or supremely in description or exceedingly in description
+        elseif eminently in description or power in description or vanquishing in description or supremely in description or exceedingly in description
             lift item
             wait 250
             drop good_items_store_container -1 -1 -1
@@ -217,7 +302,8 @@ foreach id in id_armor_items
             wft 500
             target item
             wait 2000
-        elseif fortification in description or invulnerability in description
+        elseif invulnerability in description
+            #elseif fortification in description or invulnerability in description
             lift item
             wait 250
             drop good_items_store_container -1 -1 -1
@@ -242,7 +328,8 @@ foreach id in id_weapon_items
             wft 500
             target item
             wait 2000
-        elseif power in description or vanquishing in description or supremely in description or exceedingly in description
+        elseif vanquishing in description or supremely in description or exceedingly in description            
+            #elseif power in description or vanquishing in description or supremely in description or exceedingly in description
             lift item
             wait 250
             drop good_items_store_container -1 -1 -1
@@ -288,7 +375,7 @@ if findtype '12686' backpack as arcane_essence
     if findtype '12686' container_with_id_items
         drop container_with_id_items -1 -1 -1
     else 
-        drop container_with_id_items 46 51 0
+        drop container_with_id_items 36 51 0
     endif
     wait 250
 endif

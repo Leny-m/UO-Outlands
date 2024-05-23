@@ -1,7 +1,9 @@
-useskill 'animallore'
-wft 500
-target 0xC6FBC
-wait 100
-target 0xC6FBC
-wait 2100
-loop
+setvar animal
+while skill 'animallore' < 120
+    useskill 'animallore'
+    wft 500
+    target animal
+    wait 100
+    target animal
+    wait 2100
+endwhile
