@@ -1,3 +1,16 @@
+@setvar! cdWeaponAbility 5000
+
+if not timerexists weaponAbilityTimer
+    createtimer weaponAbilityTimer
+    settimer weaponAbilityTimer cdWeaponAbility
+endif
+
+if timer weaponAbilityTimer > cdWeaponAbility
+    settimer weaponAbilityTimer 0
+    say "[weaponability1"
+    wait 200
+endif    
+
 if skill "Chivalry" >= 50
 
     @setvar! lowHealthTriggerForNobleSacrifice 40
